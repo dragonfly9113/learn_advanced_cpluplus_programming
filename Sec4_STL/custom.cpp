@@ -11,16 +11,19 @@ private:
 
 public:
 
+    Person() : name(""), age(0) {
+    }
+
+    // a copy constructor
+    Person(const Person &other) {
+	cout << "Copy constructor running!" << endl;
+	name = other.name;
+	age = other.age;
+    }
+
     Person(string name, int age) : 
 	    name(name), age(age) {
     }
-
-    /*
-    Person(string name, int age) {
-        name = name;
-	age = age;
-    }
-    */
 
     void print() {
 	cout << name << ": " << age << endl;
@@ -32,15 +35,15 @@ int main() {
 
     map<int, Person> people;    // use custom object as map value
 
-    Person person("Mike", 40);
-    //people[0] = person;
-    people.insert(make_pair(0, person));
+    people[50] = Person("Mike", 40);
+    people[32] = Person("Vicky", 30);
+    people[1] = Person("Raj", 20);
+   
+    people.insert(make_pair(55, Person("Bob", 45)));
+    people.insert(make_pair(55, Person("Sue", 24)));
 
-    //people[0] = Person("Mike", 40);
-    //people[1] = Person("Vicky", 30);
-    //people[2] = Person("Raj", 20);
-    
     for (map<int, Person>::iterator it = people.begin(); it != people.end(); it++) {
+	cout << it->first << ": " << flush;
 	it->second.print();
     }
 
