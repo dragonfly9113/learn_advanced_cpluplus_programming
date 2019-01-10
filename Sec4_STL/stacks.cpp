@@ -31,15 +31,34 @@ int main() {
     testStack.push(Test("Mike"));
     testStack.push(Test("John"));
     testStack.push(Test("Sue"));
-
+    
+    /*
     Test test1 = testStack.top();
     test1.print();
 
-    // pop one element out
-    cout << endl;
     testStack.pop();
     Test test2 = testStack.top();
     test2.print();
+    */
+
+    while (testStack.size() > 0) {
+	Test &test = testStack.top();
+	test.print();
+	testStack.pop();
+    }
+
+    // queue is FIFO
+    queue<Test> testQueue;
+
+    testQueue.push(Test("Mike"));
+    testQueue.push(Test("John"));
+    testQueue.push(Test("Sue"));
+
+    while (testQueue.size() > 0) {
+	
+
+
+    }
 
 
     return 0;
