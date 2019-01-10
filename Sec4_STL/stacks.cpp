@@ -48,16 +48,19 @@ int main() {
     }
 
     // queue is FIFO
+    cout << endl;
     queue<Test> testQueue;
 
     testQueue.push(Test("Mike"));
     testQueue.push(Test("John"));
     testQueue.push(Test("Sue"));
 
+    testQueue.back().print();
+
     while (testQueue.size() > 0) {
-	
-
-
+	Test &test = testQueue.front();
+	test.print();
+	testQueue.pop();
     }
 
 
