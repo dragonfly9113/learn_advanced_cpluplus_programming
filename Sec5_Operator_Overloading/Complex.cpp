@@ -50,6 +50,9 @@ bool Complex::operator!=(const Complex &other) const {
     return (real != other.real) || (imaginary != other.imaginary);
 }
 
+Complex Complex::operator*() const {
+    return Complex(real, -imaginary);
+}
 
 
 } // namespace caveofprogramming
