@@ -14,10 +14,24 @@ int main() {
     textring.add("four");
     textring.add("five");
 
-    for (int i = 0; i < textring.size(); i++) {
-	cout << textring.get(i) << endl;
+    //for (int i = 0; i < textring.size(); i++) {
+//	cout << textring.get(i) << endl;
+    //}
+
+    //for (string value : textring) {
+    //    cout << value << endl;
+    //}
+
+    for (ring<string>::iterator it = textring.begin(); it != textring.end(); it++) {
+        cout << *it << endl;
     }
 
+    cout << endl;
+
+
+    for (string value : textring) {
+        cout << value << endl;
+    }
 
     return 0;
 }

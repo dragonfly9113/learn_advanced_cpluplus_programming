@@ -12,14 +12,14 @@ template<class T>
 class ring {
 private:
     int m_size;
-    int m_idx;
+    int m_pos;
     T *m_values;
 
 public:
     class iterator;
 
 public:
-    ring(int size): m_size(size), m_idx(0), m_values(nullptr) {
+    ring(int size): m_size(size), m_pos(0), m_values(nullptr) {
 	m_values = new T[size];
     }
 
@@ -31,30 +31,54 @@ public:
 	return m_size;
     }
 
+    iterator begin() {
+        return iterator(0, *this);
+    }
+
+    iterator end() {
+        return iterator(m_size, *this);
+    }
+
     void add(T value) {
-	m_values[m_idx] = value;
-	m_idx++;
-	if (m_idx == m_size) {
-	    m_idx = 0;
+	m_values[m_pos] = value;
+	m_pos++;
+	if (m_pos == m_size) {
+	    m_pos = 0;
 	}
     }
 
-    T &get(int index) {
-	return m_values[index];
+    T &get(int pos) {
+	return m_values[pos];
     }
 
 };
 
 template<class T>
 class ring<T>::iterator {
+private:
+    int m_pos;
+    ring &m_ring;
+
 public:
-    void print();
+    iterator(int pos, ring &aRing): m_pos(pos), m_ring(aRing) {
+
+    }
+
+    iterator &operator++(int) {
+        m_pos++;
+
+	return *this;
+    }
+
+    iterator &operator++() {
+        m_pos++;
+
+	return *this;
+    }
+
+
 };
 
-template<class T>
-void ring<T>::iterator::print() {
-    cout << "Hello from iterator" << T() << endl;
-}
 
 
 #endif    // RING_H_
