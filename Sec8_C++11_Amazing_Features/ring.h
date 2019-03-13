@@ -76,6 +76,13 @@ public:
 	return *this;
     }
 
+    T &operator*() {
+        return m_ring.get(m_pos);
+    }
+
+    bool operator!=(const iterator &other) const {
+       return (m_pos != other.m_pos); 
+    }
 
 };
 
