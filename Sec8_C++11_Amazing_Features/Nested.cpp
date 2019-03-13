@@ -12,6 +12,7 @@ int main() {
 
     it.print();
 
+    ring<string> r = ring<string>(3);
 
     return 0;
 }
