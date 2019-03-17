@@ -9,6 +9,12 @@ void testGreet(void (*pFunc)(string name) ) {
 
 }
 
+void runDivide( double (*divide)(double, double) ) {
+
+    cout << divide(9, 3) << endl;
+
+}
+
 
 int main() {
 
@@ -30,6 +36,23 @@ int main() {
     cout << pDivide(10.0, 5.0) << endl;
     cout << pDivide(10.0, 0.0) << endl;
 
+    runDivide(pDivide);
+    cout << endl;
+
+    int one = 1;
+    int two = 2;
+    int three = 3;
+
+    // capture one and two by value
+    [one, two](){ cout << one << ", " << two << endl; }();
+
+    // capture all local variables by value
+    [=](){ cout << one << ", " << two << ", " << three << endl; }();
+
+    // default capture all local variables by value, but capture three by reference
+    [=, &three](){ three = 7; cout << one << ", " << two << ", " << three << endl; }();
+
+    cout << one << ", " << two << ", " << three << endl;
 
     return 0;
 }
