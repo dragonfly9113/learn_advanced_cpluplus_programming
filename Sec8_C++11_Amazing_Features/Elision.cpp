@@ -51,18 +51,34 @@ public:
 
     ~Test() {
 	cout << "destructor" << endl;
-	delete [] _pBuffer;
+	delete[] _pBuffer;
     }
 
-
+    friend ostream &operator<<(ostream &out, const Test &test);
 };
+
+ostream &operator<<(ostream &out, const Test &test) {
+    out << "Hello from test";
+    return out;
+}
+
+Test getTest() {
+    return Test();
+}
 
 int main() {
 
-    Test test1(3);
+    Test test1 = getTest();
 
-    Test test2;
-    test2 = test1;
+    cout << test1 << endl;
+
+    vector<Test> vec;
+    vec.push_back(Test());
+
+    int value1 = 7;
+
+    Test *pTest1 = &test1;
+    //Test *pTest2 = &getTest();  // Error: return of getTest() is temporary value (Rvalue)
 
     return 0;
 }
