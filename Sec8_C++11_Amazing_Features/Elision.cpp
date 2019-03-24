@@ -66,19 +66,38 @@ Test getTest() {
     return Test();
 }
 
+void check(const Test &value) {
+    cout << "lvalue function" << endl;
+}
+
+void check(Test &&value) {
+    cout << "rvalue function" << endl;
+}
+
 int main() {
 
     Test test1 = getTest();
 
-    cout << test1 << endl;
+    //cout << test1 << endl;
 
-    vector<Test> vec;
-    vec.push_back(Test());
+    //vector<Test> vec;
+    //vec.push_back(Test());
 
-    int value1 = 7;
+    //Test &rTest1 = test1;  // OK: test1 is Lvalue, thus rTest1 is a Lvalue reference
 
-    Test *pTest1 = &test1;
-    //Test *pTest2 = &getTest();  // Error: return of getTest() is temporary value (Rvalue)
+    //Test &rTest2 = getTest(); // Error: the return value of getTest() is a Rvalue (temp value), we cannot bind a reference to a Rvalue.
+    //const Test &rTest2 = getTest();  // OK: const reference can be bound to any value (lvalue or rvalue), it basically extends the lifetime of the tempoary return value of getTest().
+
+    //Test test2(Test(1)); // OK: Test(1) returns a temp Test obj (rvalue) and it is passed to Test copy constructor which takes a const Test reference. This is an example to show why we should define the parameter in copy constructor a const ref.
+
+    //Test &&rTest2 = test1;  // Error
+    Test &&rTest2 = Test();
+    Test &&rTest3 = getTest();
+
+    check(test1);
+    check(getTest());
+    check(Test());
+
 
     return 0;
 }
