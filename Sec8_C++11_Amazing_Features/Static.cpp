@@ -6,7 +6,10 @@ using namespace std;
 
 
 class Parent {
-
+public:
+    void speak() {
+	cout << "Parent speak!" << endl;
+    }
 
 };
 
@@ -29,7 +32,9 @@ int main() {
 
     Parent *ppb = &brother;
 
+    Parent &&p = static_cast<Parent &&>(parent);
 
+    p.speak();
 
     return 0;
 }
