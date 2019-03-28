@@ -22,7 +22,6 @@ class Brother: public Parent {
 class Sister: public Parent {
 
 
-
 };
 
 int main() {
@@ -32,8 +31,11 @@ int main() {
 
     Parent *ppb = &brother;
 
-    Brother *pbb = dynamic_cast<Brother *>(ppb);
+    //Brother *pbb = dynamic_cast<Brother *>(ppb);
 
+    Sister *pbb = reinterpret_cast<Sister *>(ppb);
+
+    cout << ppb << endl;
     cout << pbb << endl;
 
     return 0;
