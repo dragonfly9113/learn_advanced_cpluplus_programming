@@ -15,7 +15,7 @@ int main() {
 
     //cout << add(1, 2, 3) << endl;
     
-    auto calculate = bind(add, 3, 4, 5);
+    auto calculate = bind(add, 5, 6, 7);
 
     cout << calculate() << endl;
 
