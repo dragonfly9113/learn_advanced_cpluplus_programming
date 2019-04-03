@@ -11,13 +11,18 @@ int add(int a, int b, int c) {
     return a + b + c;
 }
 
+// standard function
+int run(function<int(int, int, int)> func) {
+    return func(10, 20, 30);
+}
+
 int main() {
 
-    //cout << add(1, 2, 3) << endl;
-    
-    auto calculate = bind(add, 5, 6, 7);
+    auto calculate = bind(add, _1, _2 ,_3);  // _1, _2, _3 are placeholders
 
-    cout << calculate() << endl;
+    //cout << calculate(10, 20, 30) << endl;
+    
+    cout << run(calculate) << endl;
 
 
     return 0;
