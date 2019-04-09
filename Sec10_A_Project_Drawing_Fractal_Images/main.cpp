@@ -1,4 +1,4 @@
-// Name: 	Fractal.cpp
+// Name: 	main.cpp
 
 #include <iostream>
 #include "BitmapFileHeader.h"
