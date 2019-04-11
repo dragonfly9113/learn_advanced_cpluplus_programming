@@ -7,7 +7,7 @@ using namespace std;
 
 namespace caveofprogramming {
 
-Bitmap::Bitmap(int width, int height) : m_width(width), m_height(height) {
+Bitmap::Bitmap(int width, int height) : m_width(width), m_height(height), m_pPixel(new uint8_t[width * height * 3]) {
 
 }
 
