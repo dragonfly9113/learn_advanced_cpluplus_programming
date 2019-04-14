@@ -1,10 +1,10 @@
 // name :	Bitmap.cpp
 
+#include <fstream>
 #include "Bitmap.h"
 #include "BitmapInfoHeader.h"
 #include "BitmapFileHeader.h"
 #include <string>
-#include <fstream>
 #include <iostream>
 
 using namespace caveofprogramming;
