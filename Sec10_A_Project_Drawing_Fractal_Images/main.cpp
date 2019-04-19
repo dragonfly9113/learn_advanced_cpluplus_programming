@@ -3,6 +3,7 @@
 #include <iostream>
 #include <cstdint>
 #include <memory>
+#include <math.h>
 #include "Bitmap.h"
 #include "Mandelbrot.h"
 
@@ -51,17 +52,21 @@ int main() {
     {
 	for (int x = 0; x < WIDTH; x++)
 	{
+	    uint8_t red = 0;
+	    uint8_t green = 0;
+	    uint8_t blue = 0;
+
 	    int iterations = pixelIterations[y * WIDTH + x];
 
-	    double hue = 0.0;
+	    if (iterations != Mandelbrot::MAX_ITERATIONS) {
+	        double hue = 0.0;
 
-	    for (int i = 0; i <= iterations; i++) {
-		hue += ((double)histogram[i]) / total;
-	    }
+	        for (int i = 0; i <= iterations; i++) {
+	  	    hue += ((double)histogram[i]) / total;
+	        }
 
-	    uint8_t red = 0;
-	    uint8_t green = hue*255;
-	    uint8_t blue = 0;
+	        green = pow(255, hue);
+            }
 
 	    bitmap.setPixel(x, y, red, green, blue);
         }
