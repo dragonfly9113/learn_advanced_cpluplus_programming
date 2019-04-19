@@ -16,10 +16,12 @@ int main() {
 
     Bitmap bitmap(WIDTH, HEIGHT);
 
-    double min = 999999;
-    double max = -999999;
+    //double min = 999999;
+    //double max = -999999;
 
-    unique_ptr<int[]> histogram(new int[Mandelbrot::MAX_ITERATIONS + 1]{});
+    unique_ptr<int[]> histogram(new int[Mandelbrot::MAX_ITERATIONS]{});
+
+    unique_ptr<int[]> pixelIterations(new int[HEIGHT * WIDTH]{});
 
     for (int y = 0; y < HEIGHT; y++)
     {
@@ -30,22 +32,40 @@ int main() {
 
 	    int iterations = Mandelbrot::getIterations(xFractal, yFractal);
 
-	    histogram[iterations]++;
+            int idx = y * WIDTH + x;
+            pixelIterations[idx] = iterations;
 
-	    uint8_t color = (uint8_t)(256 * (double)iterations/Mandelbrot::MAX_ITERATIONS);
-
-	    color = color * color * color;
-
-	    bitmap.setPixel(x, y, 0, color, 0);
-
-	    if (color < min) min = color;
-	    if (color > max) max = color;
-
+	    if (iterations != Mandelbrot::MAX_ITERATIONS) {
+	        histogram[iterations]++;
+            }
 	}
     }
 
-    cout << min << ", " << max << endl;
+    // Calculate the total number of iterations
+    int total = 0;
+    for (int i = 0; i < Mandelbrot::MAX_ITERATIONS; i++) {
+	total += histogram[i];
+    }
 
+    for (int y = 0; y < HEIGHT; y++)
+    {
+	for (int x = 0; x < WIDTH; x++)
+	{
+	    int iterations = pixelIterations[y * WIDTH + x];
+
+	    double hue = 0.0;
+
+	    for (int i = 0; i <= iterations; i++) {
+		hue += ((double)histogram[i]) / total;
+	    }
+
+	    uint8_t red = 0;
+	    uint8_t green = hue*255;
+	    uint8_t blue = 0;
+
+	    bitmap.setPixel(x, y, red, green, blue);
+        }
+    }
 
     if (bitmap.write("test.bmp")) {
 	cout << "Bitmap writing OK" << endl;
